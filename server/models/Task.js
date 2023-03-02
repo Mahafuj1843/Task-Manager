@@ -11,7 +11,7 @@ const TaskSchema = new mongoose.Schema({
     },
     status:{
         type: String,
-        default: 'new'
+        default: 'New'
     },
     userId:{
         type: mongoose.Schema.Types.ObjectId, 

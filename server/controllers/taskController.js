@@ -7,7 +7,7 @@ exports.createTask = async (req,res,next)=>{
         console.log(req.body)
         var newTask = new Task(req.body);
         const savedTask = await newTask.save();
-        res.status(200).json(savedTask);
+        res.status(200).send("New Task Created");
     }catch(err){
         next(err);
     }
@@ -19,7 +19,7 @@ exports.deleteTask = async (req,res,next) =>{
         if(!task) return next(createError(404, "Task not found."));
         else {
             await task.remove();
-            res.status(200).json("Task has been deleted.")
+            res.status(200).json({ message:"Task has been deleted."})
         }
     }catch(err){
         next(err);
@@ -37,7 +37,7 @@ exports.updateTask = async (req,res,next) =>{
                 {_id:req.params.id, userId:req.user.id},
                 { $set : req.body}, 
                 { new : true});
-            res.status(200).json(updatedTask)
+            res.status(200).json({message:"Successfully updated."})
         }
     }catch(err){
         next(err);
@@ -54,7 +54,7 @@ exports.listTaskByStatus = async (req,res,next) =>{
                     format: "%d-%m-%Y"
                 }
             }})
-        if(task) res.status(200).send(task)
+        if(task) res.status(200).json({task: task})
         else res.status(404).send("Not found.")
     }catch(err){
         next(err);
