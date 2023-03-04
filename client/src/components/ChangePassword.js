@@ -1,7 +1,25 @@
-import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment, useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ChangePasswordRequest } from '../apiRequest/apiRequest'
+import { ErrorToast, IsPassword } from '../helper/formHelper'
 
 const ChangePassword = () => {
+  let oldPassRef,newPassRef = useRef()
+  let navigate = useNavigate()
+
+  const changePassword = () =>{
+    let oldPass = oldPassRef.value;
+    let newPass = newPassRef.value;
+
+    if(IsPassword(newPass)){
+        ErrorToast("Password must be six characters, at least one letter and one number !")
+    }
+    else{
+      ChangePasswordRequest(oldPass,newPass).then((result)=>{
+        if(result)  navigate('/')
+      })
+    }
+  }
   return (
     <Fragment>
       <div className="container">
@@ -12,16 +30,16 @@ const ChangePassword = () => {
                 <h4>Change Password</h4>
                 <br />
                 <div className="col-md-12">
-                  <input placeholder="Old Password" className="form-control animated fadeInUp" type="password" />
+                  <input ref={(input)=>oldPassRef=input} placeholder="Old Password" className="form-control animated fadeInUp" type="password" />
                 </div>
                 <br />
                 <div className="col-md-12">
-                  <input placeholder="New Password" className="form-control animated fadeInUp" type="password" />
+                  <input ref={(input)=>newPassRef=input} placeholder="New Password" className="form-control animated fadeInUp" type="password" />
                 </div>
                 <br/>
                 <div lassName="row mt-2 p-0">
                   <div className="col-md-12">
-                    <button /*onClick={onRegistration}*/ className="btn mt-3 w-100 float-end btn-primary animated fadeInUp">Submit</button>
+                    <button onClick={changePassword} className="btn mt-3 w-100 float-end btn-primary animated fadeInUp">Submit</button>
                   </div>
                 </div>
               </div>

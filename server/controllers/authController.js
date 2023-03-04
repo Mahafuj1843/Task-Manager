@@ -69,14 +69,23 @@ exports.login = async (req, res, next) => {
     }
 }
 
+exports.profileDetails = async (req, res, next) => {
+    try {
+        const userProfile = await User.findById(req.user.id,{ _id:0,token:0,password:0,isVerified:0,createdAt:0,updatedAt:0});
+        res.status(200).json({ data: userProfile })
+    } catch (err) {
+        next(err);
+    }
+}
+
 exports.updateProfile = async (req, res, next) => {
     try {
         const updateProfile = await User.findByIdAndUpdate(
             req.user.id,
             { $set: req.body },
             { new: true });
-        const { password, tokens, ...otherDetails } = updateProfile._doc;
-        res.status(200).json({...otherDetails})
+        const { _id,password, tokens, createdAt, ...otherDetails } = updateProfile._doc;
+        res.status(200).json({ data: {...otherDetails}})
     } catch (err) {
         next(err);
     }
@@ -150,7 +159,7 @@ exports.forgotPassword = async (req, res, next) => {
             const send_to = user.email;
 
             await sendEmail(subject, message, send_to);
-            res.status(200).send("Reset Email Sent successfully.");
+            res.status(200).send("A password reset mail sent on your email.");
         }
     } catch (err) {
         next(err);
@@ -178,7 +187,7 @@ exports.resetPassword = async (req, res, next) => {
                 user.password = req.body.password;
                 user.tokens = {};
                 await user.save();
-                res.status(200).send("Password reset successful.");
+                res.status(200).send("Password reset successfully.");
             }
         }
     } catch (err) {
