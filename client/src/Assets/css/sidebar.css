@@ -102,6 +102,9 @@
     width: auto;
     height: 30px;
 }
+.logo{
+    color: #0C7075;
+}
 
 
 .side-bar-item{
@@ -110,9 +113,9 @@
     width: 100% !important;
 }
 .side-bar-item:hover{
-    border-left: 4px solid #CB0C9F;
+    border-left: 4px solid #0C7075;
     transition: 0.2s;
-    background-color: #F3D9EC;
+    background-color: #49d6dd;
 }
 .side-bar-item:hover .side-bar-item-icon {
     color: #363B64;
@@ -121,8 +124,8 @@
     color: #363B64;
 }
 .side-bar-item-active{
-    border-left: 4px solid #CB0C9F;
-    background-color:#F3D9EC;
+    border-left: 4px solid #0C7075;
+    background-color:#49d6dd;
 }
 .side-bar-item-icon{
     font-size: 18px;
@@ -265,12 +268,4 @@
         width: 100%;
         margin-left: 180px;
     }
-}
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
-
-}
-
-@media (min-width: 1200px) {
-
 }

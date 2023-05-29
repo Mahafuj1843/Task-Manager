@@ -12,11 +12,20 @@ body {
 h1,h2,h3,h4,h5,h6,button,input,textarea{
   font-family: 'Poppins', sans-serif !important;
 }
+.btn-primary:focus,
 .btn-primary{
-  background-color: #CB0C9F;
+  background-color: #0C7075;
+  outline: #0C7075 !important;
+  color: #ffff !important;
+  border-color: #0C7075 !important;
+}
+.btn-outline-primary{
+  outline: #0C7075 !important;
+  color: #0C7075 !important;
+  border-color: #0C7075 !important;
 }
 .btn-primary:hover{
-  background-color: #b81892;
+  background-color: #174a4d;
 }
 .center-screen {
   display: flex;
@@ -42,6 +51,40 @@ a:hover {
   cursor: pointer;
 }
 
+.links:hover{
+  text-decoration: underline;
+  color: #0C7075;
+}
+
+.form-control {
+  height: 38px;
+  color: #000;
+  font-size: 16px;
+  border-radius: 5px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.1); 
+}
+  .form-control::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.2) !important; 
+  }
+  .form-control::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.2) !important; 
+  }
+  .form-control:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.2) !important; 
+  }
+  .form-control:-moz-placeholder {
+    color: rgba(0, 0, 0, 0.2) !important; 
+  }
+  .form-select:focus, .form-control:active,
+  .form-control:focus, .form-control:active {
+    outline: none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #0C7075; 
+  }
+
 .swal2-styled:focus{
   box-shadow: none !important;
 }
@@ -49,3 +92,4 @@ a:hover {
 @import "sidebar.css";
 @import "progress.css";
 @import "dropdownMenu.css";
+@import "data-table.css";

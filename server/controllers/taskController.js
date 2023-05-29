@@ -1,10 +1,10 @@
 const { createError } = require("../utils/error");
+const mongoose = require("mongoose");
 const Task = require('../models/Task')
 
 exports.createTask = async (req,res,next)=>{
     try{
         req.body.userId = req.user.id
-        console.log(req.body)
         var newTask = new Task(req.body);
         const savedTask = await newTask.save();
         res.status(200).send("New Task Created");
@@ -64,6 +64,7 @@ exports.listTaskByStatus = async (req,res,next) =>{
 exports.taskStatusCount = async (req,res,next) =>{
     try {
         const task = await Task.aggregate([
+             {$match:  {userId: mongoose.Types.ObjectId(req.user.id)}},
             {$group:{_id: "$status", total:{$sum:1}}}
         ])
         res.status(200).send(task)

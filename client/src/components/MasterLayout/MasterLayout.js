@@ -3,8 +3,8 @@ import {Container,Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import {AiOutlineCheckCircle, AiOutlineEdit, AiOutlineLogout, AiOutlineMenuUnfold, AiOutlineUser} from "react-icons/ai";
 import {BsHourglass, BsListNested} from "react-icons/bs";
-// import logo from "../../assets/images/logo.svg";
-import {RiDashboardLine} from "react-icons/ri";
+import logo from "../../Assets/icons/task-list-svgrepo-com.svg";
+import {RiDashboardLine, RiProductHuntLine} from "react-icons/ri";
 import {MdOutlineCancelPresentation, MdPassword} from "react-icons/md";
 import { getUserDetails, removeSessions } from "../../helper/sessionHelper";
 
@@ -38,12 +38,14 @@ const MasterLayout = (props) => {
 
     return (
         <Fragment>
-            <Navbar  className="fixed-top px-0 shadow-sm ">
+            <Navbar  className="fixed-top px-0 shadow-sm mb-3 mb-lg-0">
                 <Container fluid={true}>
-                    <Navbar.Brand >
+                    <Navbar.Brand className='d-flex justify-content-lg-between gap-2 gap-lg-0' style={{width: 218}}>
+                        <div className="d-flex align-items-center gap-1">
+                            <img src={logo} width={23} height={23} className="logo"/>
+                            <span className="logo fw-bold">Taskify</span>
+                        </div>
                         <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/></a>
-                        
-                        <span>Task Manager</span>
                     </Navbar.Brand>
 
                     <div className="float-right h-auto d-flex">

@@ -12,6 +12,7 @@ require('dotenv').config()
 
 const authRouter = require('./routes/authRoute')
 const taskRouter = require('./routes/taskRoute')
+const productRouter = require('./routes/productRouter')
 
 
 const app= new express();
@@ -30,6 +31,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth', authRouter);
 app.use('/api/task', taskRouter);
+app.use('/api/product', productRouter);
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500

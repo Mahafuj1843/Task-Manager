@@ -19,7 +19,7 @@ const CompletedTask = ({task}) => {
   return (
     <Fragment>
       <div fluid={true} className="container content-body">
-        <div className="row p-0 m-0">
+        <div className="row p-0 m-0 mb-2 mb-lg-0">
           <div className="col-12 col-md-6 col-lg-8 px-3">
             <h5>Complete Task</h5>
           </div>

@@ -1,20 +1,24 @@
 import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/formHelper";
 import { getToken, setToken, setUserDetails } from "../helper/sessionHelper";
+import { setProduct, setTotal } from "../redux/state/productSlice";
 import { setProfile } from "../redux/state/profileSlice";
 import { hideLoader, showLoader } from "../redux/state/settingSlice";
 import { setCancelTask, setCompleteTask, setNewTask, setProgressTask, setTaskSummary } from "../redux/state/taskSlice";
 import store from "../redux/store/store";
-const BaseURL = "http://localhost:8080/api"
+const BaseURL = "https://taskify-web.onrender.com/api"
 const AxiosHeader = { headers: { "token": getToken() } }
 
 export const RegistrationRequest = (fullname, username, email, password) => {
     store.dispatch(showLoader())
     let URL = BaseURL + "/auth/register";
     let PostBody = { fullname: fullname, username: username, email: email, password: password }
+    debugger
     return axios.post(URL, PostBody).then((res) => {
+        debugger
         store.dispatch(hideLoader())
         if (res.status === 200) {
+            debugger
             SuccessToast("Registration Successfull.")
             return true;
         } else {
@@ -333,3 +337,24 @@ export const taskDeleteRequest = (id) => {
         }
     })
 }
+
+export const ProductListRequest = (pageNo, perPage, searchKey) => {
+    store.dispatch(showLoader())
+    let URL = BaseURL + "/product/list/"+pageNo+"/"+perPage+"/"+searchKey;
+    return axios.get(URL).then((res) => {
+        store.dispatch(hideLoader())
+        if (res.status === 200) {
+            store.dispatch(setProduct(res.data.data[0].Row))
+            store.dispatch(setTotal(res.data.data[0].Total[0].total))
+            return true;
+        } else {
+            ErrorToast("Something Went Wrong")
+            return false;
+        }
+    }).catch((err) => {
+        store.dispatch(hideLoader())
+            ErrorToast("Something Went Wrong")
+            return false;
+    })
+}
+
